@@ -78,11 +78,11 @@ qc_domiar_s = "Select " \
 qc_domiar_r = "Select [POSTPLOT].* From [POSTPLOT] " \
               "Where  [POSTPLOT].`Station (value)` > 0 And [POSTPLOT].`Track` Between 1175 And 1930  And [POSTPLOT].`Status` >=1 And [POSTPLOT].`Status` <= 11 And (( [POSTPLOT].`Survey Mode (value)` Not In (3,5,6) ) Or ( [POSTPLOT].`Survey Mode (value)` = 3 And ([POSTPLOT].`Number of Satellites` < 5 Or [POSTPLOT].`PDOP` > 6 Or [POSTPLOT].`CQ` > 0.3) ))  Order By [POSTPLOT].`Station (text)`"
 
-uwagi_geodetow = "Select [POSTPLOT].* From [POSTPLOT] Where [POSTPLOT].`Station (text)` Like '@*'"
+uwagi_geodetow = "Select [POSTPLOT].* From [POSTPLOT] Where [POSTPLOT].`Station (text)` Like '@%'"
 
 pom_studnie = "Select [POM_STUD].* From POM_STUD"
 
-otg_teory = "Select [OTG_teory].* From [OTG_teory] Where ([OTG_teory].`IsSurveyed` Not  Like '*')"
+otg_teory = "Select [OTG_teory].* From [OTG_teory] Where ([OTG_teory].`IsSurveyed` not like '%')"
 
 otg = "Select [OTG].* From [OTG] Where ([OTG].`Station (value)`>0)"
 
@@ -192,7 +192,7 @@ with shapefile.Writer('shp_files/QC_DOMIAR_RP', shapeType=1) as w:
                  Descriptio=item[80], Descripti2=item[81], UwagiBiuro=item[87])
 
 
-with shapefile.Writer('shp_files/QC_DOMIAR_SP', shapeType=1) as w:
+with shapefile.Writer('shp_files/QC_DOMIAR_VP', shapeType=1) as w:
     for i in pola_qc_domiar_s:
         eval(i)
 
